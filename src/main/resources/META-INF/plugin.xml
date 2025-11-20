@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.example.rider.versioning</id>
     <name>Change Assembly Version</name>
-    <vendor email="support@example.com" url="http://www.example.com">Example Vendor</vendor>
+    <vendor email="f.moghaddampoor@gmail.com">Farzad Moghaddampoor</vendor>
 
     <description><![CDATA[
     Allows changing AssemblyVersion and FileVersion for .NET projects directly from the Solution Explorer context menu.
