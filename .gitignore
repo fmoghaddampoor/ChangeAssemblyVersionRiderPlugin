@@ -16,3 +16,7 @@ bin/
 obj/
 /packages/
 /_ReSharper.Caches/
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/gradle-8.7-bin.zip
+/gradle-8.7/
