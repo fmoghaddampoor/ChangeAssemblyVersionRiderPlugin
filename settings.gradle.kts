@@ -1,1 +1,1 @@
-rootProject.name = "ChangeAssemblyVersionRiderPlugin"
+﻿rootProject.name = "AssemblyVersionRiderPlugin"

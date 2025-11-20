@@ -1,45 +1,51 @@
-plugins {
-    id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.21"
-    id("org.jetbrains.intellij") version "1.17.2"
+﻿plugins {
+    id("org.jetbrains.intellij") version "1.17.3"
+    kotlin("jvm") version "1.9.24"
 }
 
-group = "com.example"
-version = "1.0-SNAPSHOT"
+group = providers.gradleProperty("pluginGroup").orNull ?: "com.example.assemblyversion"
+version = providers.gradleProperty("pluginVersion").orNull ?: "0.1.0"
 
 repositories {
     mavenCentral()
 }
 
-// Configure Gradle IntelliJ Plugin
+kotlin {
+    jvmToolchain(17)
+}
+
 intellij {
-    version.set("2024.1") // Target Rider version (or IntelliJ Platform version)
-    type.set("RD") // Target Rider
-    plugins.set(listOf()) // Add plugins if needed, e.g. "com.intellij.java"
+    // Rider product
+    type.set("RD")
+    // Choose a Rider version compatible with your environment
+    version.set(providers.gradleProperty("platformVersion").orNull ?: "2024.2")
+    // Plugin dependencies, if any
+    plugins.set(listOf())
 }
 
 tasks {
-    // Set the JVM compatibility versions
-    withType<JavaCompile> {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
-    }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+    patchPluginXml {
+        sinceBuild.set(providers.gradleProperty("pluginSinceBuild").orNull ?: "242")
+        untilBuild.set(providers.gradleProperty("pluginUntilBuild").orNull)
+        changeNotes.set(
+            """
+            Initial version: Add 'Assembly Version…' action to Project View to set Assembly and File versions across .csproj files.
+            """.trimIndent()
+        )
     }
 
-    patchPluginXml {
-        sinceBuild.set("232")
-        untilBuild.set("242.*")
+    runIde {
+        // Running Rider requires downloading the IDE; this may take a while on first run.
+        jvmArgs = listOf("-Xmx2g")
     }
 
     signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+        certificateChain.set(providers.environmentVariable("CERTIFICATE_CHAIN"))
+        privateKey.set(providers.environmentVariable("PRIVATE_KEY"))
+        password.set(providers.environmentVariable("PRIVATE_KEY_PASSWORD"))
     }
 
     publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
+        token.set(providers.environmentVariable("PUBLISH_TOKEN"))
     }
 }
