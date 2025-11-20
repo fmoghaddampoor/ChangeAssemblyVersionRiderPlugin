@@ -1,0 +1,24 @@
+<idea-plugin>
+    <id>com.example.rider.versioning</id>
+    <name>Change Assembly Version</name>
+    <vendor email="support@example.com" url="http://www.example.com">Example Vendor</vendor>
+
+    <description><![CDATA[
+    Allows changing AssemblyVersion and FileVersion for .NET projects directly from the Solution Explorer context menu.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.rider</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action id="ChangeAssemblyVersionAction"
+                class="com.example.rider.versioning.ChangeAssemblyVersionAction"
+                text="Change Assembly Version"
+                description="Change the assembly and file version of the selected project">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>

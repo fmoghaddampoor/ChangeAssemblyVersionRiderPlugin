@@ -1,0 +1,35 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Gradle
+# Root gradle cache and build
+.gradle/
+build/
+
+.gradle
+build
+
+# Gradle cache/build directories anywhere in the repo (multi-module support)
+**/.gradle/
+**/build/
+
+# Kotlin
+.kotlin/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Gradle Wrapper (Optional: some prefer to commit this, some don't. Standard is to commit it, but ignoring the jar is an option if strict)
+# gradle/wrapper/gradle-wrapper.jar
+/build/
+/.gradle/
+/gradle/
